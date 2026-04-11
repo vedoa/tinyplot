@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Plot types – tinyplot</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dd32cac389baffb09e8d5af77f253e75.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../tinyplot.svg" alt="tinyplot" class="navbar-logo light-content">
+    <img src="../tinyplot.svg" alt="tinyplot" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../vignettes/introduction.html"> 
+<span class="menu-text">Get started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../vignettes/types.html">
+ <span class="dropdown-text">Types</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/themes.html">
+ <span class="dropdown-text">Themes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/gallery.html">
+ <span class="dropdown-text">Gallery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/tips.html">
+ <span class="dropdown-text">Tips &amp; tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../vignettes/useR2025/useR2025.html">
+ <span class="dropdown-text">useR! 2025</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="../NEWS.html">
+ <span class="dropdown-text">News</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../CITATION.html">
+ <span class="dropdown-text">Citation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../LICENSE.html">
+ <span class="dropdown-text">License</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../man/tinyplot.html"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/grantmcdermott/tinyplot" target="_blank"> <i class="bi bi-github" role="img" aria-label="tinyplot GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/gmcd.bsky.social" target="_blank"> <i class="bi bi-bluesky" role="img" aria-label="@gmcd.bsky.social">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://mastodon.social/@gmcd" target="_blank"> <i class="bi bi-mastodon" role="img" aria-label="@gmcd@mastodon.social">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#base-types" id="toc-base-types" class="nav-link active" data-scroll-target="#base-types">Base types</a></li>
+  <li><a href="#tinyplot-types" id="toc-tinyplot-types" class="nav-link" data-scroll-target="#tinyplot-types">tinyplot types</a></li>
+  <li><a href="#custom-types" id="toc-custom-types" class="nav-link" data-scroll-target="#custom-types">Custom types</a>
+  <ul class="collapse">
+  <li><a href="#a-minimal-example" id="toc-a-minimal-example" class="nav-link" data-scroll-target="#a-minimal-example">A minimal example</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
+  <li><a href="#pro-tip-re-use-existing-plot-types" id="toc-pro-tip-re-use-existing-plot-types" class="nav-link" data-scroll-target="#pro-tip-re-use-existing-plot-types">Pro tip: Re-use existing plot types</a></li>
+  <li><a href="#more-examples" id="toc-more-examples" class="nav-link" data-scroll-target="#more-examples">More examples</a></li>
+  </ul></li>
+  <li><a href="#appendix-available-settings" id="toc-appendix-available-settings" class="nav-link" data-scroll-target="#appendix-available-settings">Appendix: Available settings</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Plot types</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A key feature of <strong>tinyplot</strong> is the <code>type</code> argument, which allows you to specify different kinds of plots. This tutorial will guide you through the various plot types available in <strong>tinyplot</strong>, demonstrating how the <code>type</code> argument can be used to to create a wide range of visualizations.</p>
+<p>We will consider three categories of plot types:</p>
+<ol type="1">
+<li>Base types</li>
+<li><strong>tinyplot</strong> types</li>
+<li>Custom types</li>
+</ol>
+<p>We will use the built-in <code>airquality</code> dataset for our examples:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinyplot)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aq <span class="ot">=</span> <span class="fu">transform</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  airquality,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">labels =</span> month.abb[<span class="fu">unique</span>(Month)]),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Hot =</span> Temp <span class="sc">&gt;</span> <span class="fu">median</span>(Temp)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="base-types" class="level2">
+<h2 class="anchored" data-anchor-id="base-types">Base types</h2>
+<p>The <code>type</code> argument in <code>tinyplot</code> supports all the standard plot types from base R’s <code>plot</code> function. These are specified using single-character strings.</p>
+<ul>
+<li><code>"p"</code> (Points): Produces a scatter plot of points. This is (usually) the default plot type.</li>
+<li><code>"l"</code> (Lines): Produces a line plot.</li>
+<li><code>"b"</code> (Points and Lines): Combines points and lines in same the plot.</li>
+<li><code>"c"</code> (Empty Points Joined by Lines): Plots empty points connected by lines.</li>
+<li><code>"o"</code> (Overplotted Points and Lines): Overlaps points and lines.</li>
+<li><code>"s"</code> and <code>"S"</code> (Stair Steps): Creates a step plot.</li>
+<li><code>"h"</code> (Histogram-like Vertical Lines): Plots vertical lines resembling a histogram.</li>
+<li><code>"n"</code> (Empty Plot): Creates an empty plot frame without data.</li>
+</ul>
+<p>For example, we can use <code>"b"</code> to create a plot with combined points and lines.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(Temp <span class="sc">~</span> Day <span class="sc">|</span> Month, <span class="at">data =</span> aq, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">main =</span> <span class="st">"Points and lines"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tinyplot-types" class="level2">
+<h2 class="anchored" data-anchor-id="tinyplot-types">tinyplot types</h2>
+<p>Beyond the base types, <strong>tinyplot</strong> introduces additional plot types for more advanced visualizations. Each of these additional types are available either as a convenience string (with default behaviour) or a companion <code>type_*()</code> function (with options for customized behaviour).</p>
+<section id="shapes" class="level4">
+<h4 class="anchored" data-anchor-id="shapes">Shapes</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 50%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>string</th>
+<th>function</th>
+<th>description</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"area"</code></td>
+<td><code>type_area()</code></td>
+<td>Plots the area under the curve from <code>y</code> = 0 to <code>y</code> = f(<code>x</code>).</td>
+<td><a href="../man/type_ribbon.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"errorbar"</code></td>
+<td><code>type_errorbar()</code></td>
+<td>Adds error bars to points; requires <code>ymin</code> and <code>ymax</code>.</td>
+<td><a href="../man/type_errorbar.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"l"</code> / <code>"b"</code> / etc.</td>
+<td><code>type_lines()</code></td>
+<td>Draws lines and line-alike (same as base <code>"l"</code>, <code>"b"</code>, etc.)</td>
+<td><a href="../man/type_lines.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"pointrange"</code></td>
+<td><code>type_pointrange()</code></td>
+<td>Combines points with error bars.</td>
+<td><a href="../man/type_errorbar.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"p"</code></td>
+<td><code>type_points()</code></td>
+<td>Draws points (same as base <code>"p"</code>).</td>
+<td><a href="../man/type_points.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"polygon"</code></td>
+<td><code>type_polygon()</code></td>
+<td>Draws polygons.</td>
+<td><a href="../man/type_polygon.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"polypath"</code></td>
+<td><code>type_polypath()</code></td>
+<td>Draws a path whose vertices are given in <code>x</code> and <code>y</code>.</td>
+<td><a href="../man/type_polypath.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"rect"</code></td>
+<td><code>type_rect()</code></td>
+<td>Draws rectangles; requires <code>xmin</code>, <code>xmax</code>, <code>ymin</code>, and <code>ymax</code>.</td>
+<td><a href="../man/type_rect.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"ribbon"</code></td>
+<td><code>type_ribbon()</code></td>
+<td>Creates a filled area between <code>ymin</code> and <code>ymax</code>.</td>
+<td><a href="../man/type_ribbon.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"segments"</code></td>
+<td><code>type_segments()</code></td>
+<td>Draws line segments between pairs of points.</td>
+<td><a href="../man/type_segments.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"text"</code></td>
+<td><code>type_text()</code></td>
+<td>Adds text annotations to a plot.</td>
+<td><a href="../man/type_text.html">link</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualizations" class="level4">
+<h4 class="anchored" data-anchor-id="visualizations">Visualizations</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 50%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>string</th>
+<th>function</th>
+<th>description</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"barplot"</code> / <code>"bar"</code></td>
+<td><code>type_barplot()</code></td>
+<td>Creates a bar plot.</td>
+<td><a href="../man/type_barplot.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"boxplot"</code> / <code>"box"</code></td>
+<td><code>type_boxplot()</code></td>
+<td>Creates a box-and-whisker plot.</td>
+<td><a href="../man/type_boxplot.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"density"</code></td>
+<td><code>type_density()</code></td>
+<td>Plots the density estimate of a variable.</td>
+<td><a href="../man/type_density.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"histogram"</code> / <code>"hist"</code></td>
+<td><code>type_histogram()</code></td>
+<td>Creates a histogram of a single variable.</td>
+<td><a href="../man/type_histogram.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"jitter"</code> / <code>"j"</code></td>
+<td><code>type_jitter()</code></td>
+<td>Jittered points.</td>
+<td><a href="../man/type_jitter.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"qq"</code></td>
+<td><code>type_qq()</code></td>
+<td>Creates a quantile-quantile plot.</td>
+<td><a href="../man/type_qq.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"ridge"</code></td>
+<td><code>type_ridge()</code></td>
+<td>Creates a ridgeline (aka joy) plot.</td>
+<td><a href="../man/type_ridge.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"rug"</code></td>
+<td><code>type_rug()</code></td>
+<td>Adds a rug to an existing plot.</td>
+<td><a href="../man/type_rug.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"spineplot"</code> / <code>"spine"</code></td>
+<td><code>type_spineplot()</code></td>
+<td>Creates a spine plot or spinogram.</td>
+<td><a href="../man/type_spineplot.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"violin"</code></td>
+<td><code>type_violin()</code></td>
+<td>Creates a violin plot.</td>
+<td><a href="../man/type_violin.html">link</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="models" class="level4">
+<h4 class="anchored" data-anchor-id="models">Models</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 50%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>string</th>
+<th>function</th>
+<th>description</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"loess"</code></td>
+<td><code>type_loess()</code></td>
+<td>Local regression curve.</td>
+<td><a href="../man/type_loess.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"lm"</code></td>
+<td><code>type_lm()</code></td>
+<td>Linear regression line.</td>
+<td><a href="../man/type_lm.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"glm"</code></td>
+<td><code>type_glm()</code></td>
+<td>Generalized linear model fit.</td>
+<td><a href="../man/type_glm.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"spline"</code></td>
+<td><code>type_spline()</code></td>
+<td>Cubic (or Hermite) spline interpolation.</td>
+<td><a href="../man/type_spline.html">link</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions" class="level4">
+<h4 class="anchored" data-anchor-id="functions">Functions</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 50%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>string</th>
+<th>function</th>
+<th>description</th>
+<th>docs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"abline"</code></td>
+<td><code>type_abline()</code></td>
+<td>Line(s) with intercept and slope.</td>
+<td><a href="../man/type_abline.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"hline"</code></td>
+<td><code>type_hline()</code></td>
+<td>Horizontal line(s).</td>
+<td><a href="../man/type_abline.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"vline"</code></td>
+<td><code>type_vline()</code></td>
+<td>Vertical line(s).</td>
+<td><a href="../man/type_abline.html">link</a></td>
+</tr>
+<tr class="even">
+<td><code>"function"</code></td>
+<td><code>type_function()</code></td>
+<td>Arbitrary function.</td>
+<td><a href="../man/type_function.html">link</a></td>
+</tr>
+<tr class="odd">
+<td><code>"summary"</code></td>
+<td><code>type_summary()</code></td>
+<td>Summarizes <code>y</code> by unique values of <code>x</code>.</td>
+<td><a href="../man/type_summary.html">link</a></td>
+</tr>
+</tbody>
+</table>
+<p>To see the difference between the convenience strings and their respective <code>type_*()</code> functional equivalents, let’s quickly walk through two examples.</p>
+<p><strong>Example 1: jittering.</strong> We can add noise to data points using jittering. This allows us to avoid overplotting and can be useful to visualize discrete variables. On the left, we use the <code>"jitter</code> string shortcut with default settings. On the right, we use the <code>type_jitter()</code> function to reduce the amount of jittering.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  Temp <span class="sc">~</span> Month, <span class="at">data =</span> aq, <span class="at">main =</span> <span class="st">"Default jittering"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"jitter"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  Temp <span class="sc">~</span> Month, <span class="at">data =</span> aq, <span class="at">main =</span> <span class="st">"Modest jittering"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_jitter</span>(<span class="at">amount =</span> <span class="fl">0.05</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p><strong>Example 2: Logit fit.</strong> In this example, we use <code>type_glm()</code> to fit a logistic regression model to the data, but with different confidence intervals.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  Hot <span class="sc">~</span> Wind, <span class="at">data =</span> aq, <span class="at">main =</span> <span class="st">"Logit with 95% interval"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_glm</span>(<span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  Hot <span class="sc">~</span> Wind, <span class="at">data =</span> aq, <span class="at">main =</span> <span class="st">"Logit with 50% interval"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_glm</span>(<span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">level =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>To see what arguments are available for each type, simply consult the type-specific documentation.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?type_jitter</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>?type_glm</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># etc</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finally, please note that all <strong>tinyplot</strong> types support grouping and faceting.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(Temp <span class="sc">~</span> Wind <span class="sc">|</span> Month, <span class="at">data =</span> aq, <span class="at">facet =</span> <span class="st">"by"</span>, <span class="at">type =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="custom-types" class="level2">
+<h2 class="anchored" data-anchor-id="custom-types">Custom types</h2>
+<p>It is easy to add custom types to <strong>tinyplot</strong>. Users who need highly customized plots, or developers who want to add support to their package or functions, only need to define their own <code>type_&lt;type&gt;()</code> function. Let’s start with a simple example to see how this works in practice.</p>
+<section id="a-minimal-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-minimal-example">A minimal example</h3>
+<p>Here is a minimal example of a custom <code>type_log()</code> that logs both <code>x</code> and <code>y</code> before plotting points.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>type_log <span class="ot">=</span> <span class="cf">function</span>(<span class="at">base =</span> <span class="fu">exp</span>(<span class="dv">1</span>)) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data tranformation function</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  data_log <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    fun <span class="ot">=</span> <span class="cf">function</span>(settings, ...) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># extract raw datapoints from settings environment</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      datapoints <span class="ot">=</span> settings<span class="sc">$</span>datapoints</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># transform (log) the data</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      datapoints<span class="sc">$</span>x <span class="ot">=</span> <span class="fu">log</span>(datapoints<span class="sc">$</span>x, <span class="at">base =</span> base)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      datapoints<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">log</span>(datapoints<span class="sc">$</span>y, <span class="at">base =</span> base)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      datapoints <span class="ot">=</span> datapoints[<span class="fu">order</span>(datapoints<span class="sc">$</span>x), ]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># re-assign modified datapoints back to settings</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>      settings<span class="sc">$</span>datapoints <span class="ot">=</span> datapoints</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fun)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drawing function</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  draw_log <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    fun <span class="ot">=</span> <span class="cf">function</span>(ix, iy, icol, ...) {</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">points</span>(</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> ix,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> iy,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> icol</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fun)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return object (list)</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data_log</span>(),</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">draw_log</span>(),</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"p"</span> <span class="co"># fallback behaviour same as "p" type (e.g., legend defaults)</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>(out) <span class="ot">=</span> <span class="st">"tinyplot_type"</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To use, simply pass to <code>type = type_log(&lt;args&gt;)</code> as per as normal.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(mpg <span class="sc">~</span> wt <span class="sc">|</span> <span class="fu">factor</span>(am), <span class="at">data =</span> mtcars,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_log</span>(), <span class="at">main =</span> <span class="st">"Ln (natural logarithm)"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(mpg <span class="sc">~</span> wt <span class="sc">|</span> <span class="fu">factor</span>(am), <span class="at">data =</span> mtcars,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_log</span>(<span class="at">base =</span> <span class="dv">10</span>), <span class="at">main =</span> <span class="st">"Log (base 10)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-it-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-works">How it works</h3>
+<p>As illustrated by our minimal example, custom <strong>tinyplot</strong> types require three key functions:</p>
+<ol type="1">
+<li><strong><code>type_&lt;type&gt;()</code></strong>: The main wrapper function that users will call. It should accept any type-specific arguments that users will need to adjust the final plot (e.g., here: <code>base</code>). More importantly, it <em>must</em> return a list of class <code>"tinyplot_type"</code> and contain three elements:
+<ul>
+<li><code>data</code>: A data transformation function (see below)</li>
+<li><code>draw</code>: A drawing function (see below)</li>
+<li><code>name</code>: The name of the underlying plot type (this can be anything, but think of it as a convenient way to inherit default/fallback behaviour from an existing plot type)</li>
+</ul></li>
+<li><strong><code>data_&lt;type&gt;()</code></strong>: A function factory that returns a data transformation function:
+<ul>
+<li><strong>Required arguments</strong>: <code>settings</code> and <code>...</code></li>
+<li><code>settings</code> is an environment containing plot data and parameters, including <code>datapoints</code> (a data frame with <code>x</code>, <code>y</code>, <code>by</code>, etc.), <code>legend_args</code> (a list of legend customizations), and many other internal parameters (see <a href="#appendix-available-settings">Appendix: Available settings</a> below for a complete list).</li>
+<li>Should modify <code>settings</code> in-place (e.g., <code>settings$datapoints = ...</code>)</li>
+<li>Does not need to return anything</li>
+</ul></li>
+<li><strong><code>draw_&lt;type&gt;()</code></strong>: A function factory that returns a drawing function:
+<ul>
+<li><strong>Required arguments</strong>: <code>...</code></li>
+<li><strong>Available arguments</strong>: <code>ix</code>, <code>iy</code>, <code>ixmin</code>, <code>ixmax</code>, <code>iymin</code>, <code>iymax</code>, <code>icol</code>, <code>ibg</code>, <code>ipch</code>, <code>ilty</code>, <code>ilwd</code>, <code>icex</code>, and others</li>
+<li>The <code>i</code> prefix indicates data for a single group (when using <code>|</code> grouping or facets)</li>
+<li>Should call base R graphics functions (e.g., <code>points()</code>, <code>lines()</code>, <code>polygon()</code>) to render the plot</li>
+</ul></li>
+</ol>
+<p>The key insight is that <code>data_*()</code> transforms the data once, while <code>draw_*()</code> is called repeatedly for each group or facet.</p>
+</section>
+<section id="pro-tip-re-use-existing-plot-types" class="level3">
+<h3 class="anchored" data-anchor-id="pro-tip-re-use-existing-plot-types">Pro tip: Re-use existing plot types</h3>
+<p>Rather than code up all of the internals for a custom type from scratch, users are strongly encouraged to re-use the scaffolding for existing types. One of the easiest ways to do this—which we use repeatedly in the main <strong>tinyplot</strong> codebase—is by “delegating” to an existing type at the end of the <code>data_&lt;type&gt;</code> function. Again, this is perhaps easier seen than explained, so consider an alternate version of our previous <code>type_log()</code> function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>type_log_redux <span class="ot">=</span> <span class="cf">function</span>(<span class="at">base =</span> <span class="fu">exp</span>(<span class="dv">1</span>)) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data tranformation function</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  data_log <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    fun <span class="ot">=</span> <span class="cf">function</span>(settings, ...) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      datapoints <span class="ot">=</span> settings<span class="sc">$</span>datapoints</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      datapoints<span class="sc">$</span>x <span class="ot">=</span> <span class="fu">log</span>(datapoints<span class="sc">$</span>x, <span class="at">base =</span> base)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      datapoints<span class="sc">$</span>y <span class="ot">=</span> <span class="fu">log</span>(datapoints<span class="sc">$</span>y, <span class="at">base =</span> base)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      datapoints <span class="ot">=</span> datapoints[<span class="fu">order</span>(datapoints<span class="sc">$</span>x), ]</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      settings<span class="sc">$</span>datapoints <span class="ot">=</span> datapoints</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># re-assign/delegate to "p" type</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      settings<span class="sc">$</span>type <span class="ot">=</span> <span class="st">"p"</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fun)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return object (list)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data_log</span>(),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="cn">NULL</span>, <span class="co"># NULL =&gt; fall back to default type (now "p") drawing function</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"log"</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>(out) <span class="ot">=</span> <span class="st">"tinyplot_type"</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The key differences from our original <code>type_log</code> function are:</p>
+<ul>
+<li><code>settings$type = "p"</code> (re-assign the type at the end of <code>data_log()</code>)</li>
+<li><code>draw = NULL</code> (drop the dedicated <code>draw_log()</code> function entirely; will fall back to <code>draw_points()</code> internally now)</li>
+</ul>
+<p>This “redux” version is obviously shorter than our original version, since we can skip the custom <code>draw_log()</code> section. But re-using existing <strong>tinyplot</strong> scaffolding brings added benefits beyond code concision. In particular, it guarantees that all of the functionality from an existing <code>type</code> will be made available to your custom type. For example, in our first <code>type_log()</code> function we didn’t account for the fact that users might want to adjust groups by other aesthetics (e.g, <code>pch</code>), whereas we get this for free in <code>type_log_redux()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(mpg <span class="sc">~</span> wt <span class="sc">|</span> <span class="fu">factor</span>(am), <span class="at">data =</span> mtcars,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="st">"by"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_log</span>(), <span class="at">main =</span> <span class="st">"type_log"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(mpg <span class="sc">~</span> wt <span class="sc">|</span> <span class="fu">factor</span>(am), <span class="at">data =</span> mtcars,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="st">"by"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">type_log_redux</span>(), <span class="at">main =</span> <span class="st">"type_log_redux"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="types_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Moral of the story: be lazy and re-use existing <strong>tinyplot</strong> scaffolding wherever possible; especially drawing functions.</p>
+</section>
+<section id="more-examples" class="level3">
+<h3 class="anchored" data-anchor-id="more-examples">More examples</h3>
+<p>The <strong>tinyplot</strong> <a href="https://github.com/grantmcdermott/tinyplot/tree/main/R">source code</a> contains many examples of type constructor functions that should provide a helpful starting point for custom plot types. Each built-in <strong>tinyplot</strong> type is itself implemented as a custom type, so you can see real-world examples of varying complexity. For example, take a look at the <a href="https://github.com/grantmcdermott/tinyplot/blob/main/R/type_points.R"><code>type_points.R</code></a> or <a href="https://github.com/grantmcdermott/tinyplot/blob/main/R/type_area.R"><code>type_area.R</code></a> code. (The latter provides an example where we delegate to the <code>type_ribbon</code> drawing code.)</p>
+<p>Beyond that, the <strong>tinyplot</strong> team are always happy to help guide users on how to create their own types. Just let us know by <a href="https://github.com/grantmcdermott/tinyplot/issues">raising an issue</a> on our GitHub repo.</p>
+</section>
+</section>
+<section id="appendix-available-settings" class="level2">
+<h2 class="anchored" data-anchor-id="appendix-available-settings">Appendix: Available settings</h2>
+<p>To see what objects and parameters are available in the <code>settings</code> environment, we can create a simple <code>type_error()</code> function that stops with the names of all available settings:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>type_error <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  data_error <span class="ot">=</span> <span class="cf">function</span>() {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    fun <span class="ot">=</span> <span class="cf">function</span>(settings, ...) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">sort</span>(<span class="fu">names</span>(settings)), <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fun)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">data_error</span>()</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>(out) <span class="ot">=</span> <span class="st">"tinyplot_type"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tinyplot</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars, <span class="at">type =</span> <span class="fu">type_error</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `settings$type_data()`:
+! add, alpha, axes, bg, bubble, bubble_alpha, bubble_bg_alpha, bubble_pch, by, by_dep, call, cex, cex_dep, col, datapoints, dodge, dots, draw, facet, facet_attr, facet_by, facet_dep, facet.args, file, fill, flip, frame.plot, group_offsets, height, legend, legend_args, log, lty, lwd, null_by, null_facet, null_palette, null_xlim, null_ylim, offsets_axis, palette, pch, ribbon.alpha, type, type_data, type_draw, type_info, type_name, width, x, x_by, x_dep, xaxb, xaxl, xaxs, xaxt, xlab, xlabs, xlim, xmax, xmax_dep, xmin, xmin_dep, y, y_dep, yaxb, yaxl, yaxs, yaxt, ygroup, ylab, ylabs, ylim, ymax, ymax_dep, ymin, ymin_dep</code></pre>
+</div>
+</div>
+<p>As we can see, the <code>settings</code> environment contains many parameters that custom types can use as inputs or modify as needed.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Note: If we simply specified the <code>"glm"</code> convenience string on its own, we’d get a linear fit since the default family is <code>gaussian</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/grantmcdermott\.com\/tinyplot\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
